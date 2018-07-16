@@ -1,0 +1,90 @@
+---
+title: "NBA Free-Agent Reaction Plots"
+output: pdf_document
+---
+
+The plots on the following pages correspond to the NBA Free-Agent Sentiment Analysis Write-Up. For more information, see the full write-up or corresponding code. 
+
+# Opinion Lexicon
+```{r echo = FALSE}
+weighted <- c(68.61,100-68.61,89.24,100-89.24,71.13,100-71.13)
+unweighted <- c(67.86,100-67.86,81.42,100-81.42,75.23,100-75.23)
+player <- c(rep('LeBron', 2), rep('Boogie', 2), rep('PG13', 2))
+sentiment <- rep(c('Negative', 'Positive'), 3)
+
+df <- data.frame(weighted, unweighted, player, sentiment)
+
+### Load Libraries ### 
+library(ggplot2)
+library(ggthemes)
+ggplot(df,aes(x = player, y = weighted, 
+              fill = sentiment, 
+              label = weighted)) + 
+   geom_bar(stat = 'identity') + theme_fivethirtyeight() + 
+   scale_fill_fivethirtyeight(name = 'Sentiment') + scale_color_fivethirtyeight() + 
+   ggtitle('Sentiment of Reddit Comments', subtitle =  'Weighted Comments') + 
+   theme(plot.title = element_text(hjust = .5), plot.subtitle = element_text(hjust = .5),
+         axis.title = element_text(size = 16),legend.direction = 'vertical', 
+         legend.position = 'right') + 
+   scale_y_continuous(labels = scales::percent(seq(0,1,.25))) + 
+   xlab('Player') + ylab('') +
+   geom_label(show.legend = F, colour = 'white')
+```
+
+```{r echo = FALSE}
+
+two <- ggplot(df,aes(x = player, y = unweighted, 
+              fill = sentiment, 
+              label = unweighted)) + 
+   geom_bar(stat = 'identity') + theme_fivethirtyeight() + 
+   scale_fill_fivethirtyeight(name = 'Sentiment') + scale_color_fivethirtyeight() + 
+   ggtitle('Sentiment of Reddit Comments', subtitle = 'Equally Weighted Comments') + 
+   theme(plot.title = element_text(hjust = .5), plot.subtitle = element_text(hjust = .5),
+         axis.title = element_text(size = 16), legend.direction = 'vertical', 
+         legend.position = 'right') + 
+   scale_y_continuous(labels = scales::percent(seq(0,1,.25))) + 
+   xlab('Player') + ylab('') +
+   geom_label(show.legend = F, colour = 'white')
+two
+```
+
+# Sentence Polarity
+```{r echo=FALSE}
+weighted <- c(81.11,100-81.11,68.27,100-68.27,79.02,100-79.02)
+unweighted <- c(60.71,100-60.71,69.03,100-69.03,66.06,100-66.06)
+player <- c(rep('LeBron', 2), rep('Boogie', 2), rep('PG13', 2))
+sentiment <- rep(c('Negative', 'Positive'), 3)
+
+df <- data.frame(weighted, unweighted, player, sentiment)
+
+### Load Libraries ### 
+library(ggplot2)
+library(ggthemes)
+three <- ggplot(df,aes(x = player, y = weighted, 
+              fill = sentiment, 
+              label = weighted)) + 
+   geom_bar(stat = 'identity') + theme_fivethirtyeight() + 
+   scale_fill_fivethirtyeight(name = 'Sentiment') + scale_color_fivethirtyeight() + 
+   ggtitle('Sentiment of Reddit Comments', subtitle =  'Weighted Comments') + 
+   theme(plot.title = element_text(hjust = .5), plot.subtitle = element_text(hjust = .5),
+         axis.title = element_text(size = 16),legend.direction = 'vertical', 
+         legend.position = 'right') + 
+   scale_y_continuous(labels = scales::percent(seq(0,1,.25))) + 
+   xlab('Player') + ylab('') +
+   geom_label(show.legend = F, colour = 'white')
+three
+four <- ggplot(df,aes(x = player, y = unweighted, 
+              fill = sentiment, 
+              label = unweighted)) + 
+   geom_bar(stat = 'identity') + theme_fivethirtyeight() + 
+   scale_fill_fivethirtyeight(name = 'Sentiment') + scale_color_fivethirtyeight() + 
+   ggtitle('Sentiment of Reddit Comments', subtitle = 'Equally Weighted Comments') + 
+   theme(plot.title = element_text(hjust = .5), plot.subtitle = element_text(hjust = .5),
+         axis.title = element_text(size = 16), legend.direction = 'vertical', 
+         legend.position = 'right') + 
+   scale_y_continuous(labels = scales::percent(seq(0,1,.25))) + 
+   xlab('Player') + ylab('') +
+   geom_label(show.legend = F, colour = 'white')
+four
+```
+
